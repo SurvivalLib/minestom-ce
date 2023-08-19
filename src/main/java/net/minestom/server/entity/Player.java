@@ -93,6 +93,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jglrxavpok.hephaistos.nbt.NBT;
 import org.jglrxavpok.hephaistos.nbt.NBTType;
+import ru.melonhell.survival.api.SPlayer;
+import ru.melonhell.survival.api.SWorld;
+import ru.melonhell.survival.api.skins.SSkinProperty;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -110,7 +113,7 @@ import java.util.function.UnaryOperator;
  * <p>
  * You can easily create your own implementation of this and use it with {@link ConnectionManager#setPlayerProvider(PlayerProvider)}.
  */
-public class Player extends LivingEntity implements CommandSender, Localizable, HoverEventSource<ShowEntity>, Identified, NamedAndIdentified {
+public class Player extends LivingEntity implements CommandSender, Localizable, HoverEventSource<ShowEntity>, Identified, NamedAndIdentified, SPlayer {
     private static final Component REMOVE_MESSAGE = Component.text("You have been removed from the server without reason.", NamedTextColor.RED);
     private static final int PACKET_PER_TICK = Integer.getInteger("minestom.packet-per-tick", 20);
     private static final int PACKET_QUEUE_SIZE = Integer.getInteger("minestom.packet-queue-size", 1000);
@@ -2172,6 +2175,26 @@ public class Player extends LivingEntity implements CommandSender, Localizable, 
     public @NotNull CompletableFuture<Void> teleport(@NotNull Pos position, long @Nullable [] chunks) {
         chunkUpdateLimitChecker.clearHistory();
         return super.teleport(position, chunks);
+    }
+
+    @Override
+    public @NotNull String username() {
+        return getUsername();
+    }
+
+    @Override
+    public @Nullable SSkinProperty skin() {
+        return getSkin();
+    }
+
+    @Override
+    public @NotNull UUID uuid() {
+        return getUuid();
+    }
+
+    @Override
+    public @Nullable SWorld world() {
+        return getInstance();
     }
 
     /**

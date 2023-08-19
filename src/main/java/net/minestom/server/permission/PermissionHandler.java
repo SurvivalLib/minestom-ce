@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jglrxavpok.hephaistos.nbt.NBTCompound;
 import org.jglrxavpok.hephaistos.parser.SNBTParser;
+import ru.melonhell.survival.api.commands.SPermissionHandler;
 
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
  * and {@link Permission#getNBTData()} serializable into a string using {@link NBTCompound#toSNBT()}
  * and deserialized back with {@link SNBTParser#parse()}.
  */
-public interface PermissionHandler {
+public interface PermissionHandler extends SPermissionHandler {
 
     /**
      * Returns all permissions associated to this handler.

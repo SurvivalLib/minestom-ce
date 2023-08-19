@@ -7,6 +7,7 @@ import net.minestom.server.utils.mojang.MojangUtils;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import ru.melonhell.survival.api.skins.SSkinProperty;
 
 /**
  * Contains all the data required to store a skin.
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  * Can be applied to a player with {@link Player#setSkin(PlayerSkin)}
  * or in the linked event {@link net.minestom.server.event.player.PlayerSkinInitEvent}.
  */
-public record PlayerSkin(String textures, String signature) {
+public record PlayerSkin(String textures, String signature) implements SSkinProperty {
 
     /**
      * Gets a skin from a Mojang UUID.

@@ -1,0 +1,1 @@
+## Minestom-CE fork with [survival](https://github.com/SurvivalLib/survival) support

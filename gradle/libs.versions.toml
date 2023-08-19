@@ -10,6 +10,7 @@ hydrazine = "1.7.2"
 hephaistos = "2.6.0"
 jetbrainsAnnotations = "23.0.0"
 slf4j = "2.0.7"
+survival = "0.0.3"
 
 # Performance / Data Structures
 caffeine = "3.1.6"
@@ -56,6 +57,9 @@ jetbrainsAnnotations = { group = "org.jetbrains", name = "annotations", version.
 hephaistos-common = { group = "io.github.jglrxavpok.hephaistos", name = "common", version.ref = "hephaistos" }
 hephaistos-gson = { group = "io.github.jglrxavpok.hephaistos", name = "gson", version.ref = "hephaistos" }
 slf4j = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j"}
+
+# Survival
+survival-api = { module = "ru.melonhell.survival:api", version.ref = "survival" }
 
 # Performance / Data Structures
 caffeine = { group = "com.github.ben-manes.caffeine", name = "caffeine", version.ref = "caffeine" }

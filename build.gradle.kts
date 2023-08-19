@@ -4,7 +4,6 @@ plugins {
 
     `maven-publish`
     signing
-    alias(libs.plugins.nexuspublish)
 }
 
 version = System.getenv("SHORT_COMMIT_HASH") ?: "dev"
@@ -19,6 +18,7 @@ allprojects {
     repositories {
         mavenCentral()
         maven(url = "https://jitpack.io")
+        maven(url = "https://maven.melonhell.ru/public/")
     }
 
     configurations.all {
@@ -62,6 +62,7 @@ dependencies {
     api(libs.hydrazine)
     api(libs.bundles.kotlin)
     api(libs.bundles.hephaistos)
+    api(libs.survival.api)
     implementation(libs.minestomData)
 
     // Performance/data structures
@@ -104,24 +105,19 @@ tasks {
         replaceToken("\"&ARTIFACT\"", if (artifact == null) "null" else "\"${artifact}\"", gitFile)
     }
 
-    nexusPublishing{
-        useStaging.set(true)
-        this.packageGroup.set("dev.hollowcube")
+    publishing {
+        repositories.maven("https://maven.melonhell.ru/public/") {
+            credentials {
+                username = extensions.extraProperties["melonhell.username"]?.toString()
+                password = extensions.extraProperties["melonhell.password"]?.toString()
 
-        repositories.sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-
-            if (System.getenv("SONATYPE_USERNAME") != null) {
-                username.set(System.getenv("SONATYPE_USERNAME"))
-                password.set(System.getenv("SONATYPE_PASSWORD"))
             }
         }
     }
 
     publishing.publications.create<MavenPublication>("maven") {
         groupId = "dev.hollowcube"
-        artifactId = "minestom-ce"
+        artifactId = "minestom-ce-survival"
         version = project.version.toString()
 
         from(project.components["java"])
